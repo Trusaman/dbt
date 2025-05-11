@@ -1,0 +1,32 @@
+test_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: my-test-project-dbt  # Your GCP project ID
+      dataset: dbt_dev              # The dataset where dbt will build models
+      threads: 4                    # Number of concurrent operations
+      timeout_seconds: 300          # Query timeout in seconds
+      location: asia-southeast1                 # BigQuery dataset location
+      priority: interactive         # Job execution priority
+      job_retries: 1
+
+      # Choose ONE of the following authentication methods:
+      
+      # Option 1: Using a service account JSON keyfile
+      keyfile: C:\Users\ADMIN\DataspellProjects\test_dbt\my-test-project-dbt-94d70c036c98.json  # Full path to your service account JSON file
+      
+      # Option 2: Using impersonation (if configured)
+      # impersonate_service_account: service-account-name@project-id.iam.gserviceaccount.com
+      
+#    prod:
+#      type: bigquery
+#      method: service-account
+#      project: my-test-project-dbt  # Your GCP project ID
+#      dataset: dbt_prod             # Production dataset
+#      threads: 4
+#      timeout_seconds: 300
+#      location: US
+#      priority: interactive
+#      keyfile: /path/to/my-test-project-dbt-94d70c036c98.json  # Full path to your service account JSON file
